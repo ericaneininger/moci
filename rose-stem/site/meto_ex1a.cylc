@@ -108,7 +108,7 @@
             RECON_LAUNCHER = mpiexec -n {{RCF_PROCX * RCF_PROCY}}
             ROSE_LAUNCHER_PREOPTS = -n {{RCF_PROCX * RCF_PROCY}}
 
-{% if MULTISTEP_EXTRACT %}
+{% if REMOTE_PP %}
     [[POSTPROC_SCRIPTING_RESOURCE]]
         inherit = None, SCRIPTS_INSTALL_HPC_RESOURCE
         pre-script = 'module load scitools/default-current ; module load um_tools ; module load nco'

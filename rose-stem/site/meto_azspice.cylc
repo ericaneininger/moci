@@ -34,7 +34,7 @@ echo *** Linux Python Environment End ***
         inherit = LINUX, LINUX_PYTHON_ENV
         execution time limit = PT10M
 
-{% if not MULTISTEP_EXTRACT %}
+{% if not REMOTE_PP %}
     [[POSTPROC_RESOURCE]]
         inherit = POSTPROC_SCRIPTING_RESOURCE
 	[[[environment]]]

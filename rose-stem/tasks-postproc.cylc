@@ -3,7 +3,7 @@
     [[PP_TESTS]]
 
     [[build_pp]]
-       inherit = PP_BUILD_TASKS, {{ "BUILD_RESOURCE" if MULTISTEP_EXTRACT else "EXTRACT_RESOURCE" }}
+       inherit = PP_BUILD_TASKS, {{ "BUILD_RESOURCE" if REMOTE_PP else "EXTRACT_RESOURCE" }}
 
     [[POSTPROC]]
         inherit = POSTPROC_RESOURCE

@@ -17,7 +17,7 @@ set -eu
 
 # Required environment
 PP_SOURCE_DIR=${PP_SOURCE_DIR:=$CYLC_WORKFLOW_RUN_DIR/share/source/moci_postproc}
-PP_TARGET_DIR=${PP_TARGET_DIR:-$CYLC_WORKFLOW_SHARE_DIR/build_pp/bin}
+PP_TARGET_DIR=${PP_TARGET_DIR:-$CYLC_WORKFLOW_SHARE_DIR/bin}
 
 MOCILIB=${MOCILIB:=true}
 MOCILIB_PATH=${MOCILIB_PATH:=$CYLC_WORKFLOW_RUN_DIR/share/moci/mocilib}
@@ -76,7 +76,3 @@ for directory in $src_dirs; do
 	exit 1
     fi
 done
-
-# Update suite with path to PostProc application code
-cylc broadcast $CYLC_WORKFLOW_ID -s "[environment]PATH=$PP_TARGET_DIR:$PATH"
-

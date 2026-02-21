@@ -1,6 +1,6 @@
 {# Setup graph required to run postproc tasks #}
 
-{% set BUILD_GRAPH = "extract_source => " + ("mirror_source => " if MULTISTEP_EXTRACT else "") + "build_pp" %}
+{% set BUILD_GRAPH = "extract_source => " + ("mirror_source => " if REMOTE_PP else "") + "build_pp" %}
 
 {# Setup Multi-date tasks #}
 {% set SPACER = "         " %}
