@@ -85,14 +85,14 @@
             ATMOS_SECONDS_PER_TIMESTEP = 1200
             NSTEP_RIVERS = 3
             COUPLING_HOURS = 1
-            UMVN = 13.1
+            UMVN = 14.0
 
     [[OCEAN_ENV]]
         [[[environment]]]
             OCEAN_EXEC = $CYLC_WORKFLOW_SHARE_DIR/fcm_make_ocean/build-ocean/bin/nemo-cice.exe
             NEMO_IPROC = {{NEMO_IPROC}}
             NEMO_JPROC = {{NEMO_JPROC}}
-	    NEMO_NPROC = {{NEMO_IPROC*NEMO_JPROC}}
+            NEMO_NPROC = {{NEMO_IPROC*NEMO_JPROC}}
             NEMO_VERSION = 306
             NEMO_RST = $CYLC_WORKFLOW_SHARE_DIR/data/drivers/History_Data/NEMOhist
             OCEAN_SEAICE_TIMESTEPS_PER_DAY = 72
