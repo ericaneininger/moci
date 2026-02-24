@@ -4,8 +4,9 @@
     "test_drivers_unit" : SPACER + "extract_source => drivers_unittests & mct_validate_unittests" + (" => drivers_local_housekeeping" if HOUSEKEEPING else ""),
     "test_drivers_misc" : SPACER  + "extract_source => drivers_check_python_tabs" + (" => drivers_local_housekeeping" if HOUSEKEEPING else ""),
     "test_drivers_run" : """
-         extract_coupled_source => mirror_source => fcm_make_um => recon => coupled
-         extract_coupled_source => mirror_source => fcm_make_ocean => fcm_make2_ocean => recon
+         extract_source & extract_coupled_source => mirror_source
+         mirror_source => fcm_make_um => recon => coupled
+         mirror_source => fcm_make_ocean => fcm_make2_ocean => recon
          install_ancil => recon
          recon => coupled => check_coupled" + (" => drivers_hpc_housekeeping" if HOUSEKEEPING else "")+"
          """,
