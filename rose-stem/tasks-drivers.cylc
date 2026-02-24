@@ -12,7 +12,8 @@
         [[[environment]]]
             ROSE_TASK_APP = extract_source
             ROSE_APP_OPT_CONF_KEYS = coupled
-
+            GIT_LOC = {{ GIT_MIRROR_LOC if (USE_MIRRORS and GIT_MIRROR_LOC is defined) else GIT_LOC }}
+	    
     [[drivers_unittests]]
         inherit = DRIVERS_TESTS, UNITTESTS, DRIVERS_TESTS_RESOURCE
         env-script = "eval $(rose task-env)"

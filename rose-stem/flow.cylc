@@ -13,7 +13,7 @@
 {% do LOG.info("MOCI SOURCE CLONE="~SOURCE_DIRECTORY) %}
 
 {# Read the sources of dependencies from the dependencies.yaml file #}
-{% set dependencies = read_sources(SOURCE_DIRECTORY, "moci", USE_HEADS) %}
+{% set dependencies = read_sources(SOURCE_DIRECTORY, "moci", false) %}
 
 {# Read in groups to run #}
 {% if group is defined %}
@@ -115,8 +115,9 @@ cp $SOURCE_DIRECTORY/SimSys_Scripts/github_scripts/get_git_sources.py $CYLC_WORK
             DEPENDENCIES = {{dependencies}}
             USE_MIRRORS = {{USE_MIRRORS}}
             USE_TOKENS = false
+            USE_HEADS = false
         {% if USE_MIRRORS %}
-            {% if GIT_MIRROR_LOC %}
+            {% if GIT_MIRROR_LOC is defined and GIT_MIRROR_LOC %}
             GIT_MIRROR_LOC = {{GIT_MIRROR_LOC}}
             {% else %}
                 {{ raise(

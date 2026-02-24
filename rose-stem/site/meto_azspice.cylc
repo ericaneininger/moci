@@ -27,8 +27,6 @@ echo *** Linux Python Environment End ***
         inherit = LINUX
 
     [[DRIVERS_BUILD_TASKS]]
-	[[[environment]]]
-            GIT_MIRROR_LOC = /data/users/gitassist/git_mirrors/MetOffice
 
     [[POSTPROC_SCRIPTING_RESOURCE]]
         inherit = LINUX, LINUX_PYTHON_ENV
