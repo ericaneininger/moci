@@ -1,0 +1,2 @@
+# Fortran namelist files
+*.nl text linguist-language=fortran
