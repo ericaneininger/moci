@@ -47,13 +47,15 @@ Please be aware of and follow the Simulation Systems
 
 #### Testing
 
-MOCI rose-stem provides testing for the Coupled_Drivers and Postprocessing applications.
+MOCI rose-stem provides testing for the Coupled_Drivers and Postprocessing applications plus Utilities unittests.
 `cylc vip -z group=<group> -n <run name> <path to rose-stem dir>
 
 Available test groups:
 `all`       Runs all available tasks
 `tests`     Runs all unit tests covering MOCI code
 `postproc`  Runs all Postprocessing application tasks
-`drivers`   Runs Coupled_Drivers related tasks.  Run tasks only available on Met Office internal machines
+`drivers`   Runs all Coupled_Drivers related tasks.
+            Drivers run tasks currently only available on Met Office internal machines.
+            `drivers_non_run` tests are available on other platforms
 
 
