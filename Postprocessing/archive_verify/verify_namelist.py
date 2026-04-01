@@ -46,6 +46,7 @@ class AtmosVerify(object):
     pp_climatemeans = False
     base_mean = 'pm'
     streams_1m = None
+    streams_3m = None
     streams_90d = None
     streams_30d = None
     streams_10d = None

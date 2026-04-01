@@ -1132,6 +1132,18 @@ class DiagnosticFilesTests(unittest.TestCase):
         self.assertListEqual(expected['ap1.pp'][-2:], outfiles['last2'])
         self.assertListEqual(sorted(expected.keys()), ['ap1.pp'])
 
+    def test_expected_atmos_3m_greg_none(self):
+        ''' Assert correct list of expected files - No Gregorian 3m files'''
+        func.logtest('Assert correct return of atmos files - No Gregorian 3m:')
+        # startdate: 19950811, enddate: 19981101, meanref: ???01201
+        self.files.naml.meanstreams = []
+
+        with mock.patch('expected_content.utils.calendar',
+                        return_value='gregorian'):
+            expected = self.files.expected_diags()
+
+        self.assertEqual(expected, {})
+
     def test_expected_atmos_periodic(self):
         ''' Assert correct list of periodically intermittent atmos files '''
         func.logtest('Assert correct return of intermittent atmos files:')
