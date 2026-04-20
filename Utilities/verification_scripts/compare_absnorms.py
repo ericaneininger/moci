@@ -88,7 +88,7 @@ def generate_timestep(filename):
                 num_calls += 1
             elif num_calls > 1:
                 try:
-                    iterations, _, error = norms_regex.search(line).groups()
+                    iterations, error = norms_regex.search(line).groups()
                     nextstep.add_norm(iterations, error)
                 except AttributeError:
                     pass
