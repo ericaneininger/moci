@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 '''
 *****************************COPYRIGHT******************************
- (C) Crown copyright 2015-2025 Met Office. All rights reserved.
+ (C) Crown copyright 2015-2026 Met Office. All rights reserved.
 
  Use, duplication or disclosure of this code is subject to the restrictions
  as set forth in the licence. If no licence has been raised with this copy
@@ -24,7 +24,7 @@ except ImportError:
 import testing_functions as func
 import runtime_environment
 
-# Import of moo requires 'CYLC_SUITE_NAME' from runtime environment
+# Import of moo requires 'CYLC_WORKFLOW_NAME' from runtime environment
 runtime_environment.setup_env()
 import moo
 
@@ -37,14 +37,14 @@ MOO_CMD = {
     'FILENAME_PREFIX':     'TESTP',
     'DATAM':               'TestDir',
     'SETNAME':             MOO_NLIST.archive_set,
-    'NON_DUPLEXED':        MOO_NLIST.non_duplexed_set,
     'CATEGORY':            'UNCATEGORISED',
     'DATACLASS':           MOO_NLIST.dataclass,
     'ENSEMBLEID':          MOO_NLIST.ensembleid,
     'MOOPATH':             MOO_NLIST.moopath,
     'PROJECT':             MOO_NLIST.mooproject,
     'CONVERTPP':           True,
-    'ACT_AS':              MOO_NLIST.act_as
+    'ACT_AS':              MOO_NLIST.act_as,
+    'RISK_APPETITE':       MOO_NLIST.risk_appetite,
     }
 
 class CommandTests(unittest.TestCase):
@@ -141,7 +141,7 @@ class MooseTests(unittest.TestCase):
         with mock.patch('moo.utils.exec_subproc', return_value=(0, '')):
             with mock.patch.dict('moo.os.environ', {'PREFIX': 'PATH/'}):
                 self.inst = moo._Moose(cmd)
-
+        
     def tearDown(self):
         pass
 
@@ -223,17 +223,18 @@ class MooseTests(unittest.TestCase):
         func.logtest('test mkset function, with project:')
         mock_subproc.return_value = (0, '')
         project = 'UKESM'
-        self.inst.mkset('UNCATEGORISED', project, False)
+        self.inst.mkset('UNCATEGORISED', project, 'risk')
         cmd = 'moo mkset -v -p ' + project + ' ' + self.inst.dataset
         mock_subproc.assert_called_with(cmd, verbose=False)
         self.assertIn('created set', func.capture())
 
     @mock.patch('moo.utils.exec_subproc')
-    def test_mkset_nonduplex(self, mock_subproc):
-        '''Test mkset function with non-duplex option'''
-        func.logtest('test mkset function, with non-duplex option:')
+    def test_mkset_lowrisk(self, mock_subproc):
+        '''Test mkset function with --single-copy option'''
+        func.logtest('test mkset function, with --single-copy option:')
+
         mock_subproc.return_value = (0, '')
-        self.inst.mkset('UNCATEGORISED', '', True)
+        self.inst.mkset('UNCATEGORISED', '', 'low')
         cmd = 'moo mkset -v --single-copy ' + self.inst.dataset
         mock_subproc.assert_called_with(cmd, verbose=False)
         self.assertIn('created set', func.capture())
@@ -244,7 +245,7 @@ class MooseTests(unittest.TestCase):
         func.logtest('test mkset function, with act_as option:')
         mock_subproc.return_value = (0, '')
         self.inst._act_as = 'user.name'
-        self.inst.mkset('UNCATEGORISED', '', False)
+        self.inst.mkset('UNCATEGORISED', '', 'risk')
         cmd = 'moo mkset -v --act-as user.name ' + self.inst.dataset
         mock_subproc.assert_called_with(cmd, verbose=False)
         self.assertIn('created set', func.capture())
@@ -255,7 +256,7 @@ class MooseTests(unittest.TestCase):
         func.logtest('test mkset with category - Failed operation:')
         mock_subproc.return_value = (-1, '')
         cat = 'GLOBAL'
-        self.inst.mkset(cat, '', False)
+        self.inst.mkset(cat, '', 'very_low')
         cmd = 'moo mkset -v -c ' + cat + ' ' + self.inst.dataset
         mock_subproc.assert_called_with(cmd, verbose=False)
         self.assertIn('Unable to create', func.capture(direct='err'))
@@ -265,7 +266,7 @@ class MooseTests(unittest.TestCase):
         '''Test mkset function with pre-existing set'''
         func.logtest('test mkset function, with pre-existing set:')
         mock_subproc.return_value = (10, '')
-        self.inst.mkset('UNCATEGORISED', '', False)
+        self.inst.mkset('UNCATEGORISED', '', 'risk')
         mock_subproc.assert_called_with('moo mkset -v ' + self.inst.dataset,
                                         verbose=False)
         self.assertIn('already exists', func.capture())
