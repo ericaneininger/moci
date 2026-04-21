@@ -263,7 +263,7 @@ class _Moose(object):
         # Because of full path, need to get the filename at the end
         crn = os.path.join(self._sourcedir, crn)
 
-        moo_cmd = os.path.join(self._moopath, 'moo') + ' put -f -vv '
+        moo_cmd = os.path.join(self._moopath, 'moo') + ' put -f -v '
         if self._act_as:
             moo_cmd += '--act-as {} '.format(self._act_as)
         filepath = os.path.join(self.dataset, self._ens_id,

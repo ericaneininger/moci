@@ -411,7 +411,7 @@ class MooseTests(unittest.TestCase):
         self.inst.put_data()
         src = os.path.expandvars('TestDir/$PREFIX$RUNID.daTestfile')
         dest = os.path.expandvars('moose:myclass/mysuite/$RUNID.daTestfile')
-        mock_subproc.assert_called_with('moo put -f -vv ' + src + ' ' + dest)
+        mock_subproc.assert_called_with('moo put -f -v ' + src + ' ' + dest)
 
     @mock.patch('moo.utils.exec_subproc')
     def test_putdata_pp_no_convert(self, mock_subproc):
@@ -423,7 +423,7 @@ class MooseTests(unittest.TestCase):
         with mock.patch('moo._Moose._collection', return_value='apm.pp'):
             with mock.patch('moo.os.path.exists', return_value=True):
                 self.inst.put_data()
-        cmd = 'moo put -f -vv TestDir/TESTPa.pmTestfile.pp ' \
+        cmd = 'moo put -f -v TestDir/TESTPa.pmTestfile.pp ' \
             'moose:myclass/mysuite/apm.pp'
         mock_subproc.assert_called_with(cmd)
 
@@ -437,7 +437,7 @@ class MooseTests(unittest.TestCase):
         with mock.patch('moo._Moose._collection', return_value='apm.file'):
             with mock.patch('moo.os.path.exists', return_value=True):
                 self.inst.put_data()
-        cmd = 'moo put -f -vv TestDir/TESTPa.pmTestfile ' \
+        cmd = 'moo put -f -v TestDir/TESTPa.pmTestfile ' \
             'moose:myclass/mysuite/apm.file'
         mock_subproc.assert_called_with(cmd)
 
@@ -473,7 +473,7 @@ class PutCommandTests(unittest.TestCase):
     '''Unit tests relating to the creation of the `moo put` command'''
 
     def setUp(self):
-        self.moocmd = 'moo put -f -vv '
+        self.moocmd = 'moo put -f -v '
         self.testfile = os.path.join(MOO_CMD['DATAM'],
                                      MOO_CMD['CURRENT_RQST_NAME'])
         self.archdest = os.path.join(MOO_CMD['DATACLASS'],
