@@ -43,7 +43,7 @@ MODELS = ['atmos', 'jules', 'nemo', 'medusa', 'cice', 'si3',
 
 
 @timer.run_timer
-def archive_to_moose(filename, fnprefix, sourcedir, nlist, convertpp):
+def archive_to_moose(filename, fnprefix, sourcedir, nlist):
     '''Assemble the dictionary of variables required to archive'''
     cmd = {
         'CURRENT_RQST_ACTION': 'ARCHIVE',
@@ -56,7 +56,6 @@ def archive_to_moose(filename, fnprefix, sourcedir, nlist, convertpp):
         'ENSEMBLEID':          nlist.ensembleid,
         'MOOPATH':             nlist.moopath,
         'PROJECT':             nlist.mooproject,
-        'CONVERTPP':           convertpp,
         'ACT_AS':              nlist.act_as,
         'RISK_APPETITE':       nlist.risk_appetite,
         }
@@ -77,7 +76,6 @@ class _Moose(object):
         self._class = comms['DATACLASS']
         self._ens_id = comms['ENSEMBLEID']
         self._moopath = comms['MOOPATH']
-        self.convertpp = comms['CONVERTPP']
         self._act_as = comms['ACT_AS']
 
         # Define the collection name
@@ -103,8 +101,6 @@ class _Moose(object):
             # Non-netCDF convention files
             self._model_id = rqst[len(fnprefix):len(fnprefix) + 1]
             self._file_id = rqst[len(fnprefix) + 2:]
-
-        self.fl_pp = False
 
         if not self.chkset():
             # Create a set
@@ -180,7 +176,7 @@ class _Moose(object):
             else:
                 file_id = self._file_id[:2]
                 if re.search('[mp][1-9|a-z]', file_id):
-                    if self.convertpp:
+                    if self._file_id.endswith('.pp'):
                         ext = '.pp'
                     else:
                         ext = '.file'
@@ -243,9 +239,6 @@ class _Moose(object):
             msg += '\n -> Please contact crum@metoffice.gov.uk ' \
                 'if your requirements are not being met by this script.'
             utils.log_msg(msg, level='ERROR')
-
-        if ext == '.pp':
-            self.fl_pp = True
 
         return model_id + file_id + ext
 
