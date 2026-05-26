@@ -1,5 +1,8 @@
-import rose.upgrade
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -15,7 +18,7 @@ class UpgradeError(Exception):
     __str__ = __repr__
 
 
-class OPTv1v2(rose.upgrade.MacroUpgrade):
+class OPTv1v2(MacroUpgrade):
 
     """Upgrade macro for MOCI ticket #205 by julienpalmieri."""
 

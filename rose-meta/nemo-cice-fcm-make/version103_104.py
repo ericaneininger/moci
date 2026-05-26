@@ -1,6 +1,9 @@
-import rose.upgrade
 import re
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +20,7 @@ class UpgradeError(Exception):
 
 
 
-class vn103_t1314(rose.upgrade.MacroUpgrade):
+class vn103_t1314(MacroUpgrade):
 
     """Upgrade macro for ticket #1314 by Paul Cresswell."""
 
@@ -43,7 +46,7 @@ class vn103_t1314(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn103_t1556(rose.upgrade.MacroUpgrade):
+class vn103_t1556(MacroUpgrade):
 
     """Upgrade macro for ticket #1556 by Paul Cresswell."""
 
@@ -64,7 +67,7 @@ class vn103_t1556(rose.upgrade.MacroUpgrade):
 
         return config, self.reports
 
-class vn104_t1450(rose.upgrade.MacroUpgrade):
+class vn104_t1450(MacroUpgrade):
 
     BEFORE_TAG = "vn10.3_t1556"
     AFTER_TAG = "vn10.4"

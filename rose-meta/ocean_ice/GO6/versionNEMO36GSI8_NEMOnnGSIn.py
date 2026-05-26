@@ -1,7 +1,9 @@
-import rose.upgrade
 import re
 import sys
-
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +19,7 @@ class UpgradeError(Exception):
       __str__ = __repr__
 
 
-class go6_cice_nprocs(rose.upgrade.MacroUpgrade):
+class go6_cice_nprocs(MacroUpgrade):
 
     """Upgrade macro for setting default value of cice nprocs"""
 
@@ -33,7 +35,7 @@ class go6_cice_nprocs(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class go6_gsi8_v2(rose.upgrade.MacroUpgrade):
+class go6_gsi8_v2(MacroUpgrade):
 
     """Upgrade macro to move to nemo36_gsi8_v2 (with extra option for freshwater input from ice shelves)"""
 
@@ -84,7 +86,7 @@ class go6_gsi8_v2(rose.upgrade.MacroUpgrade):
                                   "'set_by_system'")
         return config, self.reports
 
-class go6_gsi8_v3(rose.upgrade.MacroUpgrade):
+class go6_gsi8_v3(MacroUpgrade):
 
     """Upgrade macro to move from go6_gsi8_v2 to nemo36_gsi8_v3 """
 
@@ -206,7 +208,7 @@ class go6_gsi8_v3(rose.upgrade.MacroUpgrade):
 
         return config, self.reports
 
-class go6_gsi8_v4(rose.upgrade.MacroUpgrade):
+class go6_gsi8_v4(MacroUpgrade):
 
     """Upgrade macro to move from go6_gsi8_3 to nemo36_gsi8_v4 """
 

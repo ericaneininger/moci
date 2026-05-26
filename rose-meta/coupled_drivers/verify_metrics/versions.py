@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, '.')
+
 from .version12_13 import *
 from .version13_14 import *
 from .version14_20 import *

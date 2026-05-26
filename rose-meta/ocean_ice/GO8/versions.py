@@ -1,7 +1,8 @@
-import rose.upgrade
-import re
 import sys
-
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +18,7 @@ class UpgradeError(Exception):
       __str__ = __repr__
 
 
-class nemo4_0_si3(rose.upgrade.MacroUpgrade):
+class nemo4_0_si3(MacroUpgrade):
 
     """Upgrade macro for NEMO 4 beta to NEMO 4.0"""
 

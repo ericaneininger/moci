@@ -1,6 +1,8 @@
-import rose.upgrade
-import re
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +19,7 @@ class UpgradeError(Exception):
 
 
 
-class CMIP6_CFMIP3_branches(rose.upgrade.MacroUpgrade):
+class CMIP6_CFMIP3_branches(MacroUpgrade):
 
     """Upgrade macro for CFMIP3 "Version" release."""
 

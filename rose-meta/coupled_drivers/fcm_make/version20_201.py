@@ -1,5 +1,8 @@
 import sys
-import rose.upgrade
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -15,7 +18,7 @@ class UpgradeError(Exception):
     __str__ = __repr__
 
 
-class drivers20_t517(rose.upgrade.MacroUpgrade):
+class drivers20_t517(MacroUpgrade):
 
     """Upgrade macro for ticket #517 by Harry Shepherd."""
     BEFORE_TAG = "drivers_2.0"

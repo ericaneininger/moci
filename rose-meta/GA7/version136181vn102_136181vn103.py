@@ -1,6 +1,9 @@
-import rose.upgrade
 import re
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -16,7 +19,7 @@ class UpgradeError(Exception):
       __str__ = __repr__
 
 
-class vn102_t764(rose.upgrade.MacroUpgrade):
+class vn102_t764(MacroUpgrade):
 
     """Upgrade macro for ticket #764 by andymalcolm."""
 
@@ -30,7 +33,7 @@ class vn102_t764(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:run_bl", "bl_segment_size"], "16")
         return config, self.reports
 
-class vn102_t852(rose.upgrade.MacroUpgrade):
+class vn102_t852(MacroUpgrade):
 
     """Upgrade macro for ticket #852 by AdrianLock."""
 
@@ -43,7 +46,7 @@ class vn102_t852(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:run_bl","l_bl_mix_qcf"],".true.")
         return config, self.reports
 
-class vn102_t859(rose.upgrade.MacroUpgrade):
+class vn102_t859(MacroUpgrade):
 
     """Upgrade macro for ticket #859 by Nick Savage."""
 
@@ -58,7 +61,7 @@ class vn102_t859(rose.upgrade.MacroUpgrade):
         
         return config, self.reports
 
-class vn102_t646(rose.upgrade.MacroUpgrade):
+class vn102_t646(MacroUpgrade):
 
     """Upgrade macro for ticket #646 by Carlos Ordonez."""
 
@@ -71,7 +74,7 @@ class vn102_t646(rose.upgrade.MacroUpgrade):
             ["namelist:temp_fixes", "l_fix_nh4no3_equilibrium"], ".false.")
         return config, self.reports
 
-class vn102_t911(rose.upgrade.MacroUpgrade):
+class vn102_t911(MacroUpgrade):
 
     """Upgrade macro for ticket #911 by David Walters."""
 
@@ -87,7 +90,7 @@ class vn102_t911(rose.upgrade.MacroUpgrade):
         # self.add_setting(config, ["namelist:temp_fixes", "l_eg_damp_height_lid"], ".false.")
         return config, self.reports
 
-class vn102_t155(rose.upgrade.MacroUpgrade):
+class vn102_t155(MacroUpgrade):
 
     """Upgrade macro for ticket #155 by Nick Savage."""
 
@@ -101,7 +104,7 @@ class vn102_t155(rose.upgrade.MacroUpgrade):
           ["namelist:run_aerosol", "l_temporal_emi"],".false.")
         return config, self.reports
 
-class vn102_t897(rose.upgrade.MacroUpgrade):
+class vn102_t897(MacroUpgrade):
 
     """Upgrade macro for ticket #897 by David Walters."""
 
@@ -157,7 +160,7 @@ class vn102_t897(rose.upgrade.MacroUpgrade):
                 
           return config, self.reports
 
-class vn102_t926(rose.upgrade.MacroUpgrade):
+class vn102_t926(MacroUpgrade):
 
     """Upgrade macro for ticket #926 by David Walters."""
 
@@ -207,7 +210,7 @@ class vn102_t926(rose.upgrade.MacroUpgrade):
 
           return config, self.reports
 
-class vn102_t61(rose.upgrade.MacroUpgrade):
+class vn102_t61(MacroUpgrade):
 
     """Upgrade macro for ticket #61 by Rachel Stratton."""
 
@@ -263,7 +266,7 @@ class vn102_t61(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t954(rose.upgrade.MacroUpgrade):
+class vn102_t954(MacroUpgrade):
 
     """Upgrade macro for ticket #954 by Eddy Robertson."""
 
@@ -281,7 +284,7 @@ class vn102_t954(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t212(rose.upgrade.MacroUpgrade):
+class vn102_t212(MacroUpgrade):
 
     """Upgrade macro for ticket #212 by Alejandro Bodas-Salcedo."""
 
@@ -297,7 +300,7 @@ class vn102_t212(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t367(rose.upgrade.MacroUpgrade):
+class vn102_t367(MacroUpgrade):
 
     """Upgrade macro for ticket #367 by Jonathan Wilkinson."""
 
@@ -312,7 +315,7 @@ class vn102_t367(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t430(rose.upgrade.MacroUpgrade):
+class vn102_t430(MacroUpgrade):
 
     """Upgrade macro for ticket #430 by paulearnshaw."""
 
@@ -328,7 +331,7 @@ class vn102_t430(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t452(rose.upgrade.MacroUpgrade):
+class vn102_t452(MacroUpgrade):
 
     """Upgrade macro for ticket #452 by Carlos Ordonez."""
 
@@ -342,7 +345,7 @@ class vn102_t452(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t978(rose.upgrade.MacroUpgrade):
+class vn102_t978(MacroUpgrade):
 
     """Upgrade macro for ticket #978 by Richard Hill."""
 
@@ -381,7 +384,7 @@ class vn102_t978(rose.upgrade.MacroUpgrade):
 	      
         return config, self.reports
 
-class vn102_t774(rose.upgrade.MacroUpgrade):
+class vn102_t774(MacroUpgrade):
 
     """Upgrade macro for ticket #774 by Colin Johnson."""
 
@@ -411,7 +414,7 @@ class vn102_t774(rose.upgrade.MacroUpgrade):
         # self.remove_setting(config, ["namelist:run_ukca", "i_ukca_interval"])
         return config, self.reports
 
-class vn102_t980(rose.upgrade.MacroUpgrade):
+class vn102_t980(MacroUpgrade):
 
     """Upgrade macro for ticket #980 by Adrian Lock."""
 
@@ -432,7 +435,7 @@ class vn102_t980(rose.upgrade.MacroUpgrade):
           self.change_setting_value(config, ["namelist:run_murk","l_murk_source"],".true.")
         return config, self.reports
 
-class vn102_t98(rose.upgrade.MacroUpgrade):
+class vn102_t98(MacroUpgrade):
 
     """Upgrade macro for ticket #98 by nicksavage."""
 
@@ -587,7 +590,7 @@ class vn102_t98(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t797(rose.upgrade.MacroUpgrade):
+class vn102_t797(MacroUpgrade):
 
     """Upgrade macro for ticket #797 by Nic Gedney."""
 
@@ -603,7 +606,7 @@ class vn102_t797(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t952(rose.upgrade.MacroUpgrade):
+class vn102_t952(MacroUpgrade):
 
     """Upgrade macro for ticket #952 by Paul Cresswell.
        Remove duplication of namelists across multiple files."""
@@ -722,7 +725,7 @@ class vn102_t952(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t734(rose.upgrade.MacroUpgrade):
+class vn102_t734(MacroUpgrade):
 
     """Upgrade macro for ticket #734 by David S Amundsen."""
 
@@ -745,7 +748,7 @@ class vn102_t734(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn102_t863(rose.upgrade.MacroUpgrade):
+class vn102_t863(MacroUpgrade):
 
     """Upgrade macro for ticket #863 by KalliFurtado."""
 
@@ -761,7 +764,7 @@ class vn102_t863(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:run_cloud", "l_subgrid_qv"], ".true.")
         return config, self.reports
 
-class vn102_t1016(rose.upgrade.MacroUpgrade):
+class vn102_t1016(MacroUpgrade):
 
     """Upgrade macro for ticket #1016 by John Hemmings."""
 
@@ -797,7 +800,7 @@ class vn102_t1016(rose.upgrade.MacroUpgrade):
             self.change_setting_value(
                 config, ["namelist:run_ukca", "fastjx_mode"], "1")
         return config, self.reports
-class vn102_t789(rose.upgrade.MacroUpgrade):
+class vn102_t789(MacroUpgrade):
 
     """Upgrade macro for ticket #789 by <mohitdalvi>."""
 
@@ -812,7 +815,7 @@ class vn102_t789(rose.upgrade.MacroUpgrade):
 
         return config, self.reports
 
-class vn102_t1063(rose.upgrade.MacroUpgrade):
+class vn102_t1063(MacroUpgrade):
 
     """Upgrade macro for ticket #1063 by r.s.smith@reading.ac.uk"""
 
@@ -827,7 +830,7 @@ class vn102_t1063(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:jules_elevate", "l_elev_absolute_height"],','.join(['.false.']*(npft+nnvg)),     info="Add a switch to use absolute elevations levels above sea-level")
         return config, self.reports
 
-class vn102_t153(rose.upgrade.MacroUpgrade):
+class vn102_t153(MacroUpgrade):
 
     """Upgrade macro for ticket #153 by Malcolm Brooks."""
 
@@ -840,7 +843,7 @@ class vn102_t153(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:jules_surface", "l_vary_z0m_soil"], ".false.")
         return config, self.reports
 
-class vn102_t823(rose.upgrade.MacroUpgrade):
+class vn102_t823(MacroUpgrade):
 
     """Upgrade macro for ticket #823 by Erica Neininger."""
 
@@ -871,7 +874,7 @@ class vn102_t823(rose.upgrade.MacroUpgrade):
 
         return config, self.reports
 
-class vn102_t1023(rose.upgrade.MacroUpgrade):
+class vn102_t1023(MacroUpgrade):
 
     """Upgrade macro for ticket #1023 by Adrian Lock."""
 
@@ -886,7 +889,7 @@ class vn102_t1023(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:run_bl","ritrans"],"0.1")
         return config, self.reports
 
-class vn102_t1096(rose.upgrade.MacroUpgrade):
+class vn102_t1096(MacroUpgrade):
 
     """Upgrade macro for ticket #1096 by Sarah Shannon."""
 
@@ -899,7 +902,7 @@ class vn102_t1096(rose.upgrade.MacroUpgrade):
         self.add_setting(config, ["namelist:jules_surface", "l_elev_lw_down"], ".false.")
         return config, self.reports
 
-class vn102_t485(rose.upgrade.MacroUpgrade):
+class vn102_t485(MacroUpgrade):
 
     """Upgrade macro for ticket #485 by johnmedwards."""
 
@@ -920,7 +923,7 @@ class vn102_t485(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn103_t1119(rose.upgrade.MacroUpgrade):
+class vn103_t1119(MacroUpgrade):
 
     BEFORE_TAG = "vn10.2_t485"
     AFTER_TAG = "ga6_136.18.1_vn10.3"

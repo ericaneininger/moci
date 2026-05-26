@@ -1,3 +1,6 @@
-from versionGA6136181GO6_GA6136181vn103GO6 import *
-from versionGA6136181vn103GO6_GA7vn103GO6 import *
-from versionGA7vn103GO6_GA7vn104GO6 import *
+import sys
+sys.path.insert(0, '.')
+
+from .versionGA6136181GO6_GA6136181vn103GO6 import *
+from .versionGA6136181vn103GO6_GA7vn103GO6 import *
+from .versionGA7vn103GO6_GA7vn104GO6 import *

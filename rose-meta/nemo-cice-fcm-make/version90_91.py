@@ -1,7 +1,10 @@
-import rose.upgrade
 import re
 import fileinput
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +20,7 @@ class UpgradeError(Exception):
       __str__ = __repr__
 
 
-class vn90_t6195(rose.upgrade.MacroUpgrade):
+class vn90_t6195(MacroUpgrade):
 
     """Upgrade macro for ticket #6195 by Paul Cresswell.
        Break up the config path into a number of separate options."""
@@ -60,7 +63,7 @@ class vn90_t6195(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn90_t6274(rose.upgrade.MacroUpgrade):
+class vn90_t6274(MacroUpgrade):
 
     """Upgrade macro for ticket #6274 by Paul Cresswell.
        Make both opt. level and OpenMP easily selectable from the GUI."""
@@ -117,7 +120,7 @@ class vn90_t6274(rose.upgrade.MacroUpgrade):
  
         return config, self.reports
 
-class vn90_t6288(rose.upgrade.MacroUpgrade):
+class vn90_t6288(MacroUpgrade):
 
     """Upgrade macro for ticket #6288 by Paul Cresswell.
        Make steplists easier to control from the GUI."""
@@ -210,7 +213,7 @@ class vn90_t6288(rose.upgrade.MacroUpgrade):
 
         return config, self.reports
 
-class vn91_t6270(rose.upgrade.MacroUpgrade):
+class vn91_t6270(MacroUpgrade):
 
     BEFORE_TAG = "vn9.0_t6288"
     AFTER_TAG = "vn9.1"

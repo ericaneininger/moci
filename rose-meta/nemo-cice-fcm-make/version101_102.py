@@ -1,6 +1,9 @@
-import rose.upgrade
 import re
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -16,7 +19,7 @@ class UpgradeError(Exception):
       __str__ = __repr__
 
 
-class vn102_t718(rose.upgrade.MacroUpgrade):
+class vn102_t718(MacroUpgrade):
 
     BEFORE_TAG = "vn10.1"
     AFTER_TAG = "vn10.2"

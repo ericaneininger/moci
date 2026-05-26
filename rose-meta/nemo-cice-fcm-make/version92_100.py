@@ -1,7 +1,10 @@
-import rose.upgrade
 import re
 import sys
 from collections import defaultdict
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -18,7 +21,7 @@ class UpgradeError(Exception):
 
 
 
-class vn92_t1(rose.upgrade.MacroUpgrade):
+class vn92_t1(MacroUpgrade):
 
     """Upgrade macro for ticket #1 by Paul Cresswell."""
 
@@ -175,7 +178,7 @@ class vn92_t1(rose.upgrade.MacroUpgrade):
         return config, self.reports
 
 
-class vn100_t40(rose.upgrade.MacroUpgrade):
+class vn100_t40(MacroUpgrade):
 
     BEFORE_TAG = "vn9.2.1"
     AFTER_TAG = "vn10.0"

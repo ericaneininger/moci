@@ -1,8 +1,11 @@
-import rose.upgrade
 import fileinput
 import os
 import re
 import sys
+if sys.version_info[0] == 2:
+    from rose.upgrade import MacroUpgrade
+else:
+    from metomi.rose.upgrade import MacroUpgrade
 
 class UpgradeError(Exception):
 
@@ -17,7 +20,7 @@ class UpgradeError(Exception):
           
       __str__ = __repr__
 
-class vn86_t5536(rose.upgrade.MacroUpgrade):
+class vn86_t5536(MacroUpgrade):
 
     """Upgrade macro for ticket #5536 by Paul Cresswell.
        Add the ability to use prebuilds in Rose."""

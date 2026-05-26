@@ -1,4 +1,5 @@
-import rose.upgrade
+import sys
+sys.path.insert(0, '.')
 
 from .version86_90 import * 
 from .version90_91 import *
